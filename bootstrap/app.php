@@ -98,11 +98,10 @@ $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
-$app->register(Barryvdh\DomPDF\ServiceProvider::class);
-
-$app->configure('dompdf');
-$app->alias('PDF', Barryvdh\DomPDF\Facade::class);
-
+$app->middleware([
+    Fruitcake\Cors\HandleCors::class,
+]);
+$app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

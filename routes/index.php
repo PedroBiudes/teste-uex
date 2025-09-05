@@ -19,5 +19,15 @@ $router->group(['prefix' => env('API_VERSION', 'api')], function ($router){
         // Usuario
         $router->group(['prefix' => 'usuario'], function ($router) {
             $router->post('login', 'UsuarioController@LoginUser');
+            $router->post('recuperar-senha', 'UsuarioController@ChangePassword');
+            $router->post('cadastrar-usuario', 'UsuarioController@CreateUser');
+            $router->post('buscar-contatos', 'UsuarioController@GetContacts');
+            $router->post('salvar-contato', 'UsuarioController@SaveContact');
+            $router->get('deletar-contato/{id}', 'UsuarioController@DeleteContact');
+            $router->get('deletar-usuario/{id}', 'UsuarioController@DeleteUser');
+        });
+        
+        $router->group(['prefix' => 'functions'], function ($router) {
+            $router->get('viacep/{cep}', 'ViaCepController@GetAddressByCep');
         });
 });

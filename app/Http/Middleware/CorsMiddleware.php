@@ -1,37 +1,29 @@
-<?php namespace App\Http\Middleware;
+<?php
 
-use Closure;
+namespace App\Http\Middleware;use Closure;
 
 class CorsMiddleware
 {
- /**
- * Handle an incoming request.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  \Closure  $next
- * @return mixed
- */
-public function handle($request, Closure $next)
-{
-    $headers = [
-        'Access-Control-Allow-Origin'      => '*',
-        'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
-        'Access-Control-Allow-Credentials' => 'true',
-        'Access-Control-Max-Age'           => '86400',
-        'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
-    ];
-
-    if ($request->isMethod('OPTIONS'))
+    public function handle($request, Closure $next)
     {
-        return response()->json('{"method":"OPTIONS"}', 200, $headers);
-    }
+        $headers = [
+            'Access-Control-Allow-Origin'      => '*', // ou http://localhost:5173
+            'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Credentials' => 'true',
+            'Access-Control-Max-Age'           => '86400',
+            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
+        ];
 
-    $response = $next($request);
-    foreach($headers as $key => $value)
-    {
-        $response->header($key, $value);
-    }
+        if ($request->getMethod() === "OPTIONS") {
+            return response()->json('OK', 200, $headers);
+        }
 
-    return $response;
-}
+        $response = $next($request);
+
+        foreach ($headers as $key => $value) {
+            $response->headers->set($key, $value);
+        }
+
+        return $response;
+    }
 }

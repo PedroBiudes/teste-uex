@@ -6,14 +6,13 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "barryvdh/laravel-dompdf": "^2.0",
+        "barryvdh/laravel-cors": "^3.0",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^6.5",
         "illuminate/mail": "6.0.*",
         "intervention/image": "2.7",
         "laravel/lumen-framework": "^6.0",
-        "laravel/sanctum": "^2.15",
-        "microsoft/windowsazure": "^0.5.7",
-        "picqer/php-barcode-generator": "^2.4"
+        "laravel/sanctum": "^2.15"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

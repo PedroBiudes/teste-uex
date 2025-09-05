@@ -19,7 +19,7 @@ class UsuarioController extends Controller
      * Método de criar um usuário do controller
      * @method POST
      * 
-     * @param String $type tipo de usuário se é administrativo ou se é aluno* 
+     * @param String
      * @param Request $request JSON contendo os dados do novo usuário a ser cadastrado
      * 
      * @return JsonResponse
@@ -27,5 +27,31 @@ class UsuarioController extends Controller
     public function LoginUser(Request $request)
     {
         return $this->servico->LoginUser($request);
+    }
+    
+    public function ChangePassword(Request $request)
+    {
+        return $this->servico->ChangePassword($request);
+    }
+    
+    public function CreateUser(Request $request)
+    {
+        return $this->servico->CreateUser($request);
+    }
+    public function GetContacts(Request $request)
+    {
+        return $this->servico->GetContacts($request);
+    }
+    public function SaveContact(Request $request)
+    {
+        return $this->servico->SaveContact($request);
+    }
+    public function DeleteContact($id)
+    {
+        return $this->servico->DeleteContact($id);
+    }
+    public function DeleteUser($id)
+    {
+        return $this->servico->DeleteUser($id);
     }
 }

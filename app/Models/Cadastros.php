@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cadastro extends Model
+class Cadastros extends Model
 {
     protected $table = 'cadastros';
 
     protected $fillable = [
-        'usuario_id',
+        'id_usuario',
         'nome',
         'cpf',
         'telefone',
@@ -27,6 +27,6 @@ class Cadastro extends Model
     // 🔹 Relacionamento
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 }

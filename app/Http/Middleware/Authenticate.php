@@ -4,8 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use App\Models\Token;
-use App\Functions\Log;
 
 class Authenticate
 {
@@ -44,26 +42,9 @@ class Authenticate
             return $next(env('TOKEN'));
 
         $token = $request->header('Authorization');
-        $validateToken = Token::where('Token', '=', $token)->with('usuario')->with('usuario.administrativo')->with('usuario.aluno')->first();
         
         if($validateToken == null)
             return response()->json(['error' => 'Unauthorized'], 401);
-        
-        /*
-         * Comentado por conta de problema de performance na gravação do Log em storage
-
-        $uri = $request->path();
-        $uri = str_replace("api/v1/", "", $uri);
-
-        if($validateToken->usuario->administrativo != null){
-            $requisicao = json_decode(file_get_contents('php://input'), true);
-            Log::Log($requisicao, 'Trace', 'Auditoria/UsuariosAdministrativos/'.$uri.'/'.'user:'.$validateToken->usuario->administrativo->Nome);
-        }
-        else if($validateToken->usuario->aluno != null){
-            $requisicao = json_decode(file_get_contents('php://input'), true);
-            Log::Log($requisicao, 'Trace', 'Auditoria/UsuariosAlunos/'.$uri.'/'.'user:'.$validateToken->usuario->aluno->Nome);
-        }
-        */
 
         return $next($validateToken);
     }
